@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:contentPadding="10dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="2dp">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <ImageView
+          android:id="@+id/iv_img"
+          android:layout_width="match_parent"
+          android:layout_height="220dp"
+          android:scaleType="fitXY"
+          android:src="@drawable/ic_img_default"
+          />
+      <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="5dp"
+          android:textSize="16sp"
+          android:text="标题: 打造一款厉害的app"
+          android:maxLines="1"
+          android:ellipsize="end"
+          />
+
+      <TextView
+          android:id="@+id/tv_desc"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="5dp"
+          android:text="描述: 具有混合功能的app"
+          android:maxLines="3"
+          android:ellipsize="end"
+          />
+
+      <TextView
+          android:id="@+id/tv_author"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="5dp"
+          android:textSize="16sp"
+          android:text="作者: damanku"
+          />
+
+      <TextView
+          android:id="@+id/tv_cate_type"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="16sp"
+          android:layout_marginTop="5dp"
+          android:text="类型: GanHuo | Android"
+          />
+      <TextView
+          android:id="@+id/tv_time"
+          android:layout_width="match_parent"
+          android:layout_marginTop="5dp"
+          android:layout_height="wrap_content"
+          android:text="时间: 2020-08-19"
+          />
+  </LinearLayout>
+
+</androidx.cardview.widget.CardView>
