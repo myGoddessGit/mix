@@ -17,6 +17,7 @@ import com.some.mix.base.BaseFragment;
 import com.some.mix.bean.gank.Banner;
 import com.some.mix.bean.gank.Detail;
 import com.some.mix.callback.DataCallBack;
+import com.some.mix.constans.Constant;
 import com.some.mix.gankapi.BannerApi;
 import com.some.mix.gankapi.CateDetailApi;
 import com.some.mix.utils.ToolUtils;
@@ -149,7 +150,7 @@ public class GankMainFragment extends BaseFragment implements PullToRefreshListe
                 randomCate();
                 initData();
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override

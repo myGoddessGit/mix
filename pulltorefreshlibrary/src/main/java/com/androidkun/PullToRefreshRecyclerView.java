@@ -173,6 +173,10 @@ public class PullToRefreshRecyclerView extends RecyclerView {
         }
     }
 
+    public int getHeaderHeight(View view){
+        return view.getHeight();
+    }
+
     public void removeAllHeaderViews() {
         headViews.clear();
         headerTypes.clear();

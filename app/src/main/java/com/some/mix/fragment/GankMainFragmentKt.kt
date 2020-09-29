@@ -1,9 +1,12 @@
 package com.some.mix.fragment
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.androidkun.PullToRefreshRecyclerView
 import com.androidkun.callback.PullToRefreshListener
 import com.some.mix.R
@@ -15,11 +18,13 @@ import com.some.mix.base.BaseFragment
 import com.some.mix.bean.gank.Banner
 import com.some.mix.bean.gank.Detail
 import com.some.mix.callback.DataCallBack
+import com.some.mix.event.ScrollEvent
 import com.some.mix.gankapi.BannerApi
 import com.some.mix.gankapi.CateDetailApi
 import com.some.mix.utils.ToolUtils
 import com.some.mix.widget.BannerViewPager
 import com.xcj.luck.ui.activity.MainActivity
+import de.greenrobot.event.EventBus
 
 /**
  * @author cyl
@@ -61,6 +66,15 @@ class GankMainFragmentKt : BaseFragment(), PullToRefreshListener, View.OnClickLi
         gankRecyclerView!!.setPullToRefreshListener(this)
 
         gankRecyclerView!!.onRefresh()
+        gankRecyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 5){
+                    EventBus.getDefault().post(ScrollEvent(true))
+                } else if (dy < -5) {
+                    EventBus.getDefault().post(ScrollEvent(false))
+                }
+            }
+        })
     }
 
     private fun initBanner(){

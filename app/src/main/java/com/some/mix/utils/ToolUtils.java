@@ -3,6 +3,8 @@ package com.some.mix.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,5 +93,12 @@ public class ToolUtils {
         recyclerView.setRefreshComplete();
         recyclerView.setLoadMoreComplete();
         recyclerView.loadMoreEnd();
+    }
+
+    public static int getScrollYDistance(LinearLayoutManager layoutManager){
+        int position = layoutManager.findFirstVisibleItemPosition();
+        View firstVisibleChildView = layoutManager.findViewByPosition(position);
+        int itemHeight = firstVisibleChildView.getHeight();
+        return (position) * (itemHeight);
     }
 }

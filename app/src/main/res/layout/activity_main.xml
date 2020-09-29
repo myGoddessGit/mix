@@ -28,6 +28,7 @@
             android:layout_alignParentBottom="true"
             android:background="#CCFFFFFF"
             android:orientation="horizontal"
+            android:animateLayoutChanges="true"
             android:padding="5dp">
 
             <RadioButton

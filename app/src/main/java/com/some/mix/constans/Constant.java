@@ -18,6 +18,8 @@ public class Constant {
 
     public static final String COOKIE = "CookieAll";
 
+    public static final long DELAYMILLiIS = 1 * 1000L;
+
     //列表Type
     public static class LIST_TYPE {
         public static final int HOME = 0; //首页文章列表

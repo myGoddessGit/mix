@@ -11,6 +11,7 @@ import com.some.mix.adapter.GankDetailAdapter;
 import com.some.mix.base.BaseFragment;
 import com.some.mix.bean.gank.Detail;
 import com.some.mix.callback.DataCallBack;
+import com.some.mix.constans.Constant;
 import com.some.mix.gankapi.CateDetailApi;
 import com.some.mix.utils.ToolUtils;
 
@@ -108,7 +109,7 @@ public class CateDetailFragment extends BaseFragment implements PullToRefreshLis
                     initData(1);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -121,7 +122,7 @@ public class CateDetailFragment extends BaseFragment implements PullToRefreshLis
                 recyclerView.setLoadMoreComplete();
                 adapter.notifyDataSetChanged();
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override

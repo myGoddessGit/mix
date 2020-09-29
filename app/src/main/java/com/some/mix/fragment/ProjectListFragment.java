@@ -12,6 +12,7 @@ import com.some.mix.adapter.ProjectListAdapter;
 import com.some.mix.base.BaseFragment;
 import com.some.mix.bean.wanandroid.Article;
 import com.some.mix.callback.DataCallBack;
+import com.some.mix.constans.Constant;
 import com.some.mix.utils.ToolUtils;
 import com.some.mix.wanandroidapi.ProjectArticleApi;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class ProjectListFragment extends BaseFragment implements PullToRefreshLi
                     initData(1);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -120,7 +121,7 @@ public class ProjectListFragment extends BaseFragment implements PullToRefreshLi
                     listAdapter.notifyDataSetChanged();
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override

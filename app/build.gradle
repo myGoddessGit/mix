@@ -60,4 +60,5 @@ dependencies {
     implementation 'com.permissionx.guolindev:permissionx:1.3.0'
     implementation project(':multiple-status-view')
     implementation project(':vapp')
+    implementation 'de.greenrobot:eventbus:2.4.0'
 }

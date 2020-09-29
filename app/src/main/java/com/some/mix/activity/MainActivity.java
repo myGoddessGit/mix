@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import com.some.mix.R;
+import com.some.mix.event.ScrollEvent;
 import com.some.mix.fragment.GankMainFragment;
 import com.some.mix.fragment.GankMainFragmentKt;
 import com.some.mix.fragment.WanMainFragment;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author cyl
@@ -29,10 +32,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private int index;
     private TextView tvText;
     private ImageView imgSearch;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         initViews();
         initFragments();
@@ -52,6 +57,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         imgSearch.setOnClickListener(this);
         imgSearch.setVisibility(View.GONE);
         radioButtons = new RadioButton[2];
+        radioGroup = findViewById(R.id.rg_main);
         radioButtons[0] = findViewById(R.id.rb_gankIo);
         radioButtons[1] = findViewById(R.id.rb_wanAndroid);
         radioButtons[0].setSelected(true);
@@ -89,6 +95,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+    public void onEvent(ScrollEvent event){
+        if (event.isUp()){
+            radioGroup.setVisibility(View.GONE);
+        } else  {
+            radioGroup.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -114,5 +128,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

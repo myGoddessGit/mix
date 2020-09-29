@@ -15,6 +15,7 @@ import com.some.mix.R;
 import com.some.mix.adapter.GankGirlAdapter;
 import com.some.mix.bean.gank.Detail;
 import com.some.mix.callback.DataCallBack;
+import com.some.mix.constans.Constant;
 import com.some.mix.gankapi.GirlApi;
 import com.some.mix.utils.ToolUtils;
 
@@ -109,7 +110,7 @@ public class GirlActivity extends FragmentActivity implements View.OnClickListen
                     initData(1);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class GirlActivity extends FragmentActivity implements View.OnClickListen
                 recyclerView.setLoadMoreComplete();
                 adapter.notifyDataSetChanged();
             }
-        },2 * 1000);
+        },Constant.DELAYMILLiIS);
     }
 
     @Override

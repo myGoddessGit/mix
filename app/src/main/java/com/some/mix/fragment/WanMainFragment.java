@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
 import com.some.mix.R;
@@ -20,10 +22,12 @@ import com.some.mix.bean.wanandroid.Article;
 import com.some.mix.bean.wanandroid.Banner;
 import com.some.mix.callback.DataCallBack;
 import com.some.mix.constans.Constant;
+import com.some.mix.event.ScrollEvent;
 import com.some.mix.wanandroidapi.BannerApi;
 import com.some.mix.wanandroidapi.HomeArticleApi;
 import com.some.mix.wanandroidapi.TopArticleApi;
 import com.some.mix.widget.BannerViewPager;
+import de.greenrobot.event.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +80,16 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
             initData(0);
             recyclerView.onRefresh();
         }
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 5){
+                    EventBus.getDefault().post(new ScrollEvent(true));
+                } else if (dy < -5){
+                    EventBus.getDefault().post(new ScrollEvent(false));
+                }
+            }
+        });
     }
 
     private void initBanner(){
@@ -161,7 +175,7 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
                     initData(0);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -176,7 +190,7 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
                     articleAdapter.notifyDataSetChanged();
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override

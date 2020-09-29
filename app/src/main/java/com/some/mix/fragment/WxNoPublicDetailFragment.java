@@ -13,6 +13,7 @@ import com.some.mix.adapter.WanArticleAdapter;
 import com.some.mix.base.BaseFragment;
 import com.some.mix.bean.wanandroid.Article;
 import com.some.mix.callback.DataCallBack;
+import com.some.mix.constans.Constant;
 import com.some.mix.utils.ToolUtils;
 import com.some.mix.wanandroidapi.TreeArticleApi;
 import com.some.mix.wanandroidapi.WxArticleApi;
@@ -111,7 +112,7 @@ public class WxNoPublicDetailFragment extends BaseFragment implements PullToRefr
                     initData(1);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class WxNoPublicDetailFragment extends BaseFragment implements PullToRefr
                     articleAdapter.notifyDataSetChanged();
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override

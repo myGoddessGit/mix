@@ -115,7 +115,7 @@ public class TreeDetailListFragment extends BaseFragment implements PullToRefres
                     initData(0);
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class TreeDetailListFragment extends BaseFragment implements PullToRefres
                     articleAdapter.notifyDataSetChanged();
                 }
             }
-        }, 2 * 1000);
+        }, Constant.DELAYMILLiIS);
     }
 
     @Override
