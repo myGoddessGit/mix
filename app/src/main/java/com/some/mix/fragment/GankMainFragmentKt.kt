@@ -48,7 +48,7 @@ class GankMainFragmentKt : BaseFragment(), PullToRefreshListener, View.OnClickLi
     override fun initView(view: View) {
         gankRecyclerView = view.findViewById(R.id.ganKRecyclerView)
         ToolUtils.setLayoutManager(gankRecyclerView, context)
-        val headView = LayoutInflater.from(activity).inflate(R.layout.layout_gank_header, gankRecyclerView, false)
+        val headView = LayoutInflater.from(mAttachActivity).inflate(R.layout.layout_gank_header, gankRecyclerView, false)
         viewPager = headView.findViewById(R.id.viewPager)
         headView.findViewById<TextView>(R.id.tvGanHuo).setOnClickListener(this)
         headView.findViewById<TextView>(R.id.tvArticle).setOnClickListener(this)
@@ -56,7 +56,7 @@ class GankMainFragmentKt : BaseFragment(), PullToRefreshListener, View.OnClickLi
         headView.findViewById<TextView>(R.id.tvMvp).setOnClickListener(this)
         initBanner()
         gankRecyclerView!!.addHeaderView(headView)
-        gAdapter = GankDetailAdapter(activity, R.layout.gank_item_detail, dataBeans)
+        gAdapter = GankDetailAdapter(mAttachActivity, R.layout.gank_item_detail, dataBeans)
         gankRecyclerView!!.adapter = gAdapter
         //设置是否开启上拉加载
         gankRecyclerView!!.setLoadingMoreEnabled(false)
@@ -81,7 +81,7 @@ class GankMainFragmentKt : BaseFragment(), PullToRefreshListener, View.OnClickLi
         val api = BannerApi()
         api.setCallBack(object : DataCallBack<List<Banner.DataBean>>{
             override fun onSuccess(response: List<Banner.DataBean>?) {
-                bannerAdapter = GankBannerAdapter(activity, response)
+                bannerAdapter = GankBannerAdapter(mAttachActivity, response)
                 viewPager!!.adapter = bannerAdapter
                 viewPager!!.offscreenPageLimit = response!!.size
                 viewPager!!.currentItem = 1000 * response.size
@@ -150,13 +150,13 @@ class GankMainFragmentKt : BaseFragment(), PullToRefreshListener, View.OnClickLi
         when (v.id){
             R.id.tvGanHuo -> toDetailFragment("GanHuo")
             R.id.tvArticle -> toDetailFragment("Article")
-            R.id.tvGirl -> startActivity(Intent(activity, GirlActivity::class.java))
-            R.id.tvMvp -> startActivity(Intent(activity, MainActivity::class.java))
+            R.id.tvGirl -> startActivity(Intent(mAttachActivity, GirlActivity::class.java))
+            R.id.tvMvp -> startActivity(Intent(mAttachActivity, MainActivity::class.java))
         }
     }
 
    private fun toDetailFragment(type : String){
-        CateActivity.startCateDetailActivity(activity, type)
+        CateActivity.startCateDetailActivity(mAttachActivity, type)
     }
 
 }

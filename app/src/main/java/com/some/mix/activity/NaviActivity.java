@@ -102,6 +102,16 @@ public class NaviActivity extends FragmentActivity implements View.OnClickListen
                 });
             }
         });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy != 0){
+                    if (adapter != null){
+                        adapter.isCheck = false;
+                    }
+                }
+            }
+        });
 
     }
 
@@ -122,6 +132,7 @@ public class NaviActivity extends FragmentActivity implements View.OnClickListen
             mContext = context;
             mList = list;
         }
+        public boolean isCheck = true;
         @NonNull
         @Override
         public NameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -132,11 +143,12 @@ public class NaviActivity extends FragmentActivity implements View.OnClickListen
         @Override
         public void onBindViewHolder(@NonNull final NameViewHolder holder, final int position) {
             holder.textView.setText(mList.get(position).getName());
-
+            if (isCheck) {
+                onClickPosition.clickPosition(0);
+            }
             holder.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //holder.textView.setTextColor(mContext.getResources().getColor(R.color._0091ea));
                     onClickPosition.clickPosition(position);
                     Toast.makeText(mContext, mList.get(position).getName(),Toast.LENGTH_SHORT).show();
                 }

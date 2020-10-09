@@ -9,6 +9,7 @@ import com.some.mix.adapter.GankDetailAdapter
 import com.some.mix.base.BaseFragment
 import com.some.mix.bean.gank.Detail
 import com.some.mix.callback.DataCallBack
+import com.some.mix.constans.Constant
 import com.some.mix.gankapi.CateDetailApi
 import com.some.mix.utils.ToolUtils
 
@@ -49,8 +50,8 @@ class CateDetailFragmentKt : BaseFragment(), PullToRefreshListener{
             type = bundle.getString(TYPE)
         }
         recyclerView = view!!.findViewById(R.id.recyclerView)
-        ToolUtils.setLayoutManager(recyclerView, activity)
-        adapter = GankDetailAdapter(activity, R.layout.gank_item_detail, beans)
+        ToolUtils.setLayoutManager(recyclerView, mAttachActivity)
+        adapter = GankDetailAdapter(mAttachActivity, R.layout.gank_item_detail, beans)
         recyclerView!!.adapter = adapter
         ToolUtils.openPullRecyclerView(recyclerView, this)
         if (beans.size == 0){
@@ -93,7 +94,7 @@ class CateDetailFragmentKt : BaseFragment(), PullToRefreshListener{
        recyclerView!!.postDelayed({
            recyclerView!!.setRefreshComplete()
            if (mPage != 1) initData(1)
-       },2000)
+       },Constant.DELAYMILLiIS)
     }
 
     override fun onLoadMore() {
@@ -102,7 +103,7 @@ class CateDetailFragmentKt : BaseFragment(), PullToRefreshListener{
            initData(mPage)
            recyclerView!!.setLoadMoreComplete()
            adapter?.notifyDataSetChanged()
-       },2000)
+       },Constant.DELAYMILLiIS)
     }
 
     override fun onDestroy() {
