@@ -61,7 +61,9 @@ public class SimpleApi<T> extends ActionApi {
             public void onResponse(JSONObject response) {
                 String state = null;
                 try {
-                    state = response.getString("errorCode").toLowerCase();
+                    if (response.has("errorCode")){
+                        state = response.getString("errorCode").toLowerCase();
+                    }
                     if ("0".equals(state)){
                         JSONArray jsonArray = response.getJSONArray("data");
                         List<T> list = new ArrayList<T>();
@@ -78,7 +80,10 @@ public class SimpleApi<T> extends ActionApi {
                             getCallBack().onSuccess(list);
                         }
                     } else  {
-                        String message = response.getString("errorMsg");
+                        String message = "";
+                        if (response.has("errorMsg")){
+                            message = response.getString("errorMsg");
+                        }
                         if (!TextUtils.isEmpty(message)){
                             if (getCallBack() != null){
                                 callBack.onFail(message);
@@ -93,10 +98,12 @@ public class SimpleApi<T> extends ActionApi {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (getCallBack() != null){
-                    getCallBack().onFail(error.toString());
+                if (error != null && error.getMessage() != null){
+                    if (getCallBack() != null){
+                        getCallBack().onFail(error.toString());
+                    }
+                    Log.i(TAGERROR, error.getMessage());
                 }
-                Log.i(TAGERROR, error.getMessage());
             }
         });
         VolleyHelper.getInstance().addRequest(request);

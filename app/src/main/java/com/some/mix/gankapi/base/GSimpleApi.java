@@ -61,7 +61,9 @@ public class GSimpleApi<T> extends ActionApi {
             public void onResponse(JSONObject response) {
                 String status = null;
                 try {
-                    status = response.getString("status").toLowerCase();
+                    if (response.has("status")){
+                        status = response.getString("status").toLowerCase();
+                    }
                     if ("100".equals(status)){
                         JSONArray jsonArray = response.getJSONArray("data");
                         List<T> list = new ArrayList<T>();
@@ -85,10 +87,12 @@ public class GSimpleApi<T> extends ActionApi {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (getCallBack() != null){
-                    getCallBack().onFail(error.toString());
+                if (error != null && error.getMessage() != null){
+                    if (getCallBack() != null){
+                        getCallBack().onFail(error.toString());
+                    }
+                    Log.i(TAGERROR, error.getMessage());
                 }
-                Log.i(TAGERROR, error.getMessage());
             }
         });
         VolleyHelper.getInstance().addRequest(request);

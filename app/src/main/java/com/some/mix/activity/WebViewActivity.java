@@ -1,6 +1,7 @@
 package com.some.mix.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -81,8 +83,23 @@ public class WebViewActivity extends FragmentActivity implements View.OnClickLis
                     .createAgentWeb()
                     .ready()
                     .go(url);
-        web.getJsInterfaceHolder().addJavaObject("imagelistener", new LoadImageJavascriptInterface(this));
-        web.getWebCreator().getWebView().setWebViewClient(new LoadImageWebViewClient());
+        web.getWebCreator().getWebView().setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (url.startsWith("http") || url.startsWith("https")){
+                    view.loadUrl(url);
+                    return false;
+                } else {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(view.getUrl()));
+                        startActivity(intent);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     @Override

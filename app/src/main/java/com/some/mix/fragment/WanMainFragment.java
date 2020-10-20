@@ -113,12 +113,15 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
         Log.i("WanBannerApi", bannerApi.buildRealUrl());
     }
 
+    private boolean isBannerData = false;
+
     private void initData(final int page){
         TopArticleApi topApi = new TopArticleApi();
         topApi.setCallBack(new DataCallBack<List<Article>>() {
             @Override
             public void onSuccess(List<Article> response) {
                 if (response != null){
+                    isBannerData = true;
                     if (mPage == 0){
                         for (Article article : response){
                             article.setTop(true);
@@ -170,6 +173,9 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
         recyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (bannerAdapter == null && !isBannerData){
+                    initBanner();
+                }
                 recyclerView.setRefreshComplete();
                 if (mPage != 0){
                     initData(0);

@@ -58,7 +58,7 @@ public class CollectArticleListApi extends ActionApi {
                 String state = null;
                 try {
                     Gson gson = new Gson();
-                    List<Article> list = new ArrayList<>();
+                    List<Article> list;
                     state = response.getString("errorCode").toLowerCase();
                     if ("0".equals(state)){
                         JSONObject object = response.getJSONObject("data");

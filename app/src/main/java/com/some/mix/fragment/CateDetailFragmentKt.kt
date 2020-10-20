@@ -43,13 +43,13 @@ class CateDetailFragmentKt : BaseFragment(), PullToRefreshListener{
         return R.layout.fragment_detail_layout
     }
 
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         val bundle = arguments
         if (bundle != null){
             cate = bundle.getString(CATE)
             type = bundle.getString(TYPE)
         }
-        recyclerView = view!!.findViewById(R.id.recyclerView)
+        recyclerView = view.findViewById(R.id.recyclerView)
         ToolUtils.setLayoutManager(recyclerView, mAttachActivity)
         adapter = GankDetailAdapter(mAttachActivity, R.layout.gank_item_detail, beans)
         recyclerView!!.adapter = adapter
@@ -60,11 +60,11 @@ class CateDetailFragmentKt : BaseFragment(), PullToRefreshListener{
         }
     }
 
-    fun initData(page: Int?){
+    fun initData(page: Int){
         val api = CateDetailApi()
         api.setCate(cate)
         api.setType(type)
-        api.setPage(page!!)
+        api.setPage(page)
         api.setCount(api.defaultCount())
         api.setCallBack(object : DataCallBack<List<Detail.DataBean>>{
             override fun onSuccess(response: List<Detail.DataBean>?) {
