@@ -1,15 +1,12 @@
 package com.some.mix.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -20,8 +17,6 @@ import com.just.agentweb.AgentWeb;
 import com.some.mix.R;
 import com.some.mix.bean.gank.Detail;
 import com.some.mix.bean.wanandroid.Article;
-import com.some.mix.utils.LoadImageJavascriptInterface;
-import com.some.mix.utils.LoadImageWebViewClient;
 
 import java.lang.reflect.Method;
 
@@ -85,17 +80,10 @@ public class WebViewActivity extends FragmentActivity implements View.OnClickLis
                     .go(url);
         web.getWebCreator().getWebView().setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url == null) return false;
                 if (url.startsWith("http") || url.startsWith("https")){
                     view.loadUrl(url);
-                    return false;
-                } else {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(view.getUrl()));
-                        startActivity(intent);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
                 }
                 return true;
             }
