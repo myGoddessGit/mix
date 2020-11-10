@@ -128,9 +128,6 @@ public class WanMainFragment extends BaseFragment implements PullToRefreshListen
                         }
                         list.clear();
                         list.addAll(response);
-//                        if (articleAdapter != null){
-//                            articleAdapter.notifyDataSetChanged();
-//                        }
                     }
                 }
             }
