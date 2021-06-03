@@ -62,7 +62,7 @@ public class GankGirlAdapter extends RecyclerView.Adapter<GankGirlAdapter.ViewHo
         return mList != null ? mList.size() : 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+   static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
 

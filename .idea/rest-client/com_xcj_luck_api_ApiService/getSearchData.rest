@@ -1,0 +1,29 @@
+GET
+{BASE_URL}/v1/search?&num=10&start=10
+&query={query}
+
+
+
+
+%%%
+# Duration: 189 ms
+# GET
+# https://baobab.kaiyanapp.com/api//v1/search?&num=10&start=10&query={query}
+
+
+# status 200
+
+@Date: Fri, 13 Nov 2020 04:00:03 GMT
+@Content-Type: application/json;charset=UTF-8
+@Transfer-Encoding: chunked
+@Connection: keep-alive
+
+
+# length: [70]
+{
+  "itemList": [],
+  "count": 0,
+  "total": 0,
+  "nextPageUrl": null,
+  "adExist": false
+}

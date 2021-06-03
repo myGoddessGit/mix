@@ -8,6 +8,7 @@ import android.view.ViewGroup
 /**
  * @author cyl
  * @date 2020/9/11
+ * 流式布局
  */
 class FlowLayout(context: Context, attrs: AttributeSet) : ViewGroup(context, attrs){
 
@@ -55,7 +56,7 @@ class FlowLayout(context: Context, attrs: AttributeSet) : ViewGroup(context, att
             val childWidth = marginParams.leftMargin + marginParams.rightMargin + measuredWidth
             val childHeight = marginParams.topMargin + marginParams.bottomMargin + measuredHeight
             // 判断是否换行 该行已占大小 + 该元素的大小 > 父容器宽度 则换行
-            rowsMaxHeight = Math.max(rowsMaxHeight, childHeight)
+            rowsMaxHeight = rowsMaxHeight.coerceAtLeast(childHeight)
             if (rowsWidth + childWidth > flowWidth){
                 // 重置行宽度
                 rowsWidth = paddingLeft + paddingRight

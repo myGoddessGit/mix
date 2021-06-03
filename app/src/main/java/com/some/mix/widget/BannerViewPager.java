@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
 public class BannerViewPager extends ViewPager {
     private TaskRunnable mTaskRunnable;
     private Handler mHandler;
-    private BannerViewPager instance;
+    final private BannerViewPager instance;
 
     public static boolean mIsRunning = false; // 是否正在执行
 

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,6 @@ import java.util.List;
 public class GirlDetailActivity  extends FragmentActivity implements View.OnClickListener, View.OnLongClickListener{
 
     private RoundCornerPhotoView imageView;
-    private PhotoViewAttacher mAttacher;
     private String url = "";
     private String desc = "";
     private Bitmap mBitmap;
@@ -85,7 +85,7 @@ public class GirlDetailActivity  extends FragmentActivity implements View.OnClic
         desc = intent.getStringExtra("GDesc");
     }
     private void loadImage(){
-        mAttacher = new PhotoViewAttacher(imageView);
+        PhotoViewAttacher mAttacher = new PhotoViewAttacher(imageView);
         mAttacher.setOnLongClickListener(this);
         mAttacher.setOnViewTapListener(new OnViewTapListener() {
             @Override
@@ -123,8 +123,6 @@ public class GirlDetailActivity  extends FragmentActivity implements View.OnClic
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
         }
